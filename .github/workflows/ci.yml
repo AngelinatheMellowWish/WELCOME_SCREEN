@@ -1,0 +1,101 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, main]
+    paths-ignore: ['docs/**', '**/*.md', '**/*.txt']
+  pull_request:
+    branches: [develop, main]
+    paths-ignore: ['docs/**', '**/*.md', '**/*.txt']
+  schedule:
+    # 每周一 03:00 UTC 自动跑 500 规则性能基准（AC-85），结果与历史对比
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  build-test-gate:
+    name: Build + Test + Gates
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore src/Object1688.sln
+
+      # 静态分析门禁：编译警告视为错误（TreatWarningsAsErrors + GenerateDocumentationFile/CS1591）
+      - name: Build (warnaserror)
+        run: dotnet build src/Object1688.sln --no-restore -c Release -warnaserror
+
+      # 单元/集成测试 + 覆盖率收集（coverlet，cobertura；范围见 coverage.runsettings）
+      - name: Test with coverage
+        run: dotnet test src/Object1688.sln --no-build -c Release --settings coverage.runsettings --collect:"XPlat Code Coverage" --results-directory "$env:RUNNER_TEMP/coverage"
+
+      # 覆盖率门禁：核心库（Shared/规则匹配/配置解析）分支覆盖率 ≥ 80%（开发规范 §4.4）
+      - name: Coverage gate (Shared >= 80%)
+        shell: pwsh
+        run: |
+          $cov = Get-ChildItem "$env:RUNNER_TEMP/coverage" -Recurse -Filter "*.cobertura.xml" | Select-Object -First 1
+          if (-not $cov) { throw "cobertura not found" }
+          [xml]$x = Get-Content $cov.FullName
+          $shared = $x.coverage.packages.package | Where-Object { $_.name -like 'Object1688.Shared*' }
+          $line = [double]$shared.'line-rate'
+          $branch = [double]$shared.'branch-rate'
+          $threshold = 0.80
+          Write-Host "Shared line-rate=$line branch-rate=$branch (threshold=$threshold)"
+          if ($line -lt $threshold -or $branch -lt $threshold) {
+            throw "Coverage gate FAILED: Shared line=$line branch=$branch < $threshold"
+          }
+          Write-Host "Coverage gate PASSED"
+
+      # i18n 键一致性门禁（AC-75 / 开发规范 §4.5）
+      - name: ResX key consistency gate
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File build/check-resx-keys.ps1
+
+  perf-bench:
+    name: Perf benchmark (500-rule)
+    runs-on: windows-latest
+    timeout-minutes: 15
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore src/Object1688.sln
+
+      - name: Build Release
+        run: dotnet build src/Object1688.sln --no-restore -c Release
+
+      # AC-85 性能基准：500 条规则匹配预算回归（退化 >2× 仅告警，不阻断）；结果存 Artifact 供历史对比
+      - name: Run 500-rule match benchmark
+        shell: pwsh
+        run: |
+          $env:OBJECT1688_PERF_BENCH = '1'
+          $out = dotnet test tests/Object1688.Tests/Object1688.Tests.csproj --no-build -c Release --filter "FullyQualifiedName~RuleMatcherBench" --logger "console;verbosity=detailed" 2>&1
+          $out | Write-Host
+          $m = [regex]::Match(($out -join "`n"), '\[PERF\][^\r\n]*?([0-9]+(?:\.[0-9]+)?)\s*ms/poll')
+          if (-not $m.Success) { Write-Host "::warning::[PERF] line not found in benchmark output"; exit 0 }
+          $ms = [double]$m.Groups[1].Value
+          $baseline = (Get-Content build/perf-baseline.json -Raw -Encoding UTF8 | ConvertFrom-Json).msPerPoll
+          $ratio = [math]::Round($ms / $baseline, 2)
+          $summary = "perf 500-rule: {0} ms/poll | baseline {1} | ratio {2}x | {3}" -f $ms, $baseline, $ratio, (Get-Date -Format o)
+          Write-Host $summary
+          $summary | Out-File -FilePath perf-result.txt -Encoding utf8
+          if ($ms -gt 2 * $baseline) { Write-Host "::warning::perf regression >2x: $summary" } else { Write-Host "perf within 2x of baseline" }
+
+      - name: Upload perf result artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-bench-result
+          path: perf-result.txt

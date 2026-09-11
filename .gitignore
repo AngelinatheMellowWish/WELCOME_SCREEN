@@ -1,0 +1,48 @@
+# ===== 构建产物 =====
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.user
+*.suo
+.vs/
+*.vshost.exe
+
+# ===== 发布产物 =====
+publish/
+Release/
+Debug/
+
+# ===== 运行时日志（目录结构入仓，日志文件排除）=====
+log/*.log
+log/**/*.dmp
+log/exports/*
+log/crash/*
+!log/exports/.gitkeep
+!log/crash/.gitkeep
+
+# ===== 运行时状态 =====
+*.pid
+*.lock
+
+# ===== 系统/编辑器 =====
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~
+.idea/
+
+# ===== 临时 =====
+tmp/
+temp/
+
+# ===== 工具状态（不入仓）=====
+.omo/
+.opencode/
+.codegraph/
+
+# ===== 机密/本地参考（禁止上传）=====
+参考样板/
+dist/

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <!--
+    Object1688 覆盖率门禁配置（开发规范 §4.3/§4.4）。
+    门禁只衡量「核心逻辑」分支覆盖率：配置解析 / 规则匹配 / 文本渲染。
+    基础设施与生成代码不参与门禁：
+      - Object1688.Shared.Ipc.*   命名管道通信（异步 I/O、握手、ACL，集成面）
+      - Object1688.Shared.Crash.* 崩溃转储/护栏（进程级、难以单测）
+      - System.Text.RegularExpressions.Generated.*  源生成器产物（无意义覆盖）
+  -->
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <Exclude>[Object1688.Shared]Object1688.Shared.Ipc.*,[Object1688.Shared]Object1688.Shared.Crash.*,[Object1688.Shared]System.Text.RegularExpressions.Generated.*</Exclude>
+          <ExcludeByAttribute>GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

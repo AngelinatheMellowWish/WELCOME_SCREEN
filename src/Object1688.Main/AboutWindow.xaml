@@ -1,0 +1,33 @@
+<Window x:Class="Object1688.Main.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="关于 Object1688"
+        Width="440" Height="360"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+    <StackPanel Margin="20">
+        <TextBlock FontSize="22" FontWeight="Bold" Text="Object1688 大字提示" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="VersionText" HorizontalAlignment="Center" Foreground="#666" Margin="0,4,0,12"/>
+
+        <GroupBox Header="许可证">
+            <TextBlock TextWrapping="Wrap" Margin="4">
+                Object1688 依 <Bold>GPL-3.0</Bold> 授权发布（见仓库 LICENSE）。
+                大字渲染使用 Montserrat 字体，依 <Bold>SIL Open Font License 1.1</Bold> 授权
+                （完整条款见 resources/fonts/OFL.txt）。
+            </TextBlock>
+        </GroupBox>
+
+        <GroupBox Header="数据与隐私" Margin="0,10,0,0">
+            <TextBlock TextWrapping="Wrap" Margin="4">
+                日志与事件流可能包含命中的进程名与窗口标题，仅存本机、绝不上传（NFR-04）；
+                可在性能窗口"清除历史"一键清空。
+            </TextBlock>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,18,0,0">
+            <Button Content="打开项目页面" Click="OnOpenProjectClicked" Padding="10,4" Margin="0,0,8,0"/>
+            <Button Content="关闭" Click="OnCloseClicked" Padding="14,4" IsDefault="True"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

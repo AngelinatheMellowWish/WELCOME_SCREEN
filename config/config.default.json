@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "global": {
+    "defaultFontSize": 96,
+    "defaultPosition": "center",
+    "defaultOutlineColor": "#000000",
+    "defaultOutlineWidth": 0,
+    "outlineMode": "shadow",
+    "targetScreen": "primary",
+    "monitorPollIntervalMs": 1500,
+    "dedupeWindowSeconds": 10,
+    "logLevel": "INFO",
+    "logMaxSizeMB": 5,
+    "logRetainCount": 10,
+    "dpiAwareness": "per-monitor-v2",
+    "renderCostCpuWarnMs": 400,
+    "renderCostMemWarnMB": 80
+  },
+  "welcome": {
+    "enabled": true,
+    "displayLines": [
+      {
+        "text": "欢迎",
+        "fontSize": 120
+      },
+      {
+        "text": "Welcome",
+        "fontSize": 48
+      }
+    ],
+    "delaySeconds": 1,
+    "holdSeconds": 4,
+    "wrapStrategy": "wrap"
+  },
+  "manual": {
+    "enabled": true,
+    "displayLines": [
+      {
+        "text": "Object1688",
+        "fontSize": 96
+      }
+    ],
+    "holdSeconds": 4,
+    "shortcut": "Alt+F"
+  },
+  "rules": [
+    {
+      "ruleId": "r-001",
+      "matchType": "process",
+      "matchValue": "chrome.exe",
+      "matchMode": "exact",
+      "enabled": true,
+      "matchCaseSensitive": false,
+      "includeFullscreen": true,
+      "targetScreen": "primary",
+      "displayLines": [
+        {
+          "text": "浏览器",
+          "fontSize": 96
+        }
+      ],
+      "wrapStrategy": "shrink",
+      "delaySeconds": 2,
+      "holdSeconds": 4,
+      "position": "center",
+      "outlineColor": "#000000",
+      "outlineWidth": 0
+    },
+    {
+      "ruleId": "r-002",
+      "matchType": "windowTitle",
+      "matchValue": "*游戏*",
+      "matchMode": "wildcard",
+      "enabled": false,
+      "matchCaseSensitive": false,
+      "includeFullscreen": true,
+      "targetScreen": "primary",
+      "displayLines": [
+        {
+          "text": "游戏时间",
+          "fontSize": 120
+        }
+      ],
+      "wrapStrategy": "shrink",
+      "delaySeconds": 1,
+      "holdSeconds": 3,
+      "position": "center",
+      "outlineColor": "#000000",
+      "outlineWidth": 0
+    },
+    {
+      "ruleId": "r-003",
+      "matchType": "process",
+      "matchValue": "code*",
+      "matchMode": "wildcard",
+      "enabled": false,
+      "matchCaseSensitive": false,
+      "includeFullscreen": false,
+      "targetScreen": "primary",
+      "displayLines": [
+        {
+          "text": "代码时间",
+          "fontSize": 110
+        },
+        {
+          "text": "{appName}",
+          "fontSize": 40
+        }
+      ],
+      "wrapStrategy": "wrap",
+      "delaySeconds": 2,
+      "holdSeconds": 4,
+      "position": "top-center",
+      "outlineColor": "#000000",
+      "outlineWidth": 2
+    }
+  ],
+  "dnd": {
+    "paused": false,
+    "scheduleEnabled": false,
+    "presentationAutoSilence": false,
+    "schedule": []
+  },
+  "sound": {
+    "enabled": false,
+    "source": "system",
+    "customPath": "",
+    "volume": 80
+  },
+  "autostart": true,
+  "firstRun": true,
+  "uiState": {
+    "configWin": {
+      "x": null,
+      "y": null,
+      "width": 900,
+      "height": 640,
+      "splitter": 280,
+      "tab": "rules"
+    },
+    "perfWin": {
+      "x": null,
+      "y": null,
+      "width": 760,
+      "height": 520,
+      "splitter": 0,
+      "tab": "overview",
+      "timeWindow": "60s"
+    }
+  }
+}

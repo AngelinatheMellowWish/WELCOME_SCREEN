@@ -1,0 +1,5 @@
+{
+  "msPerPoll": 5.44,
+  "target": 5.0,
+  "note": "500 rules x 300 targets single-round match. CI windows-latest baseline (2026-09-11 run #24/#26 = 5.44ms; local typical hardware 4.57ms). CI measured >2x baseline = warning only, non-blocking (AC-85)."
+}

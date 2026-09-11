@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationIcon>..\..\resources\icons\app.ico</ApplicationIcon>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <RootNamespace>Object1688.Main</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Object1688.Shared\Object1688.Shared.csproj" />
+    <!-- 子进程：仅建立构建顺序（ReferenceOutputAssembly=false），产物由下方 Copy 目标复制 -->
+    <ProjectReference Include="..\Object1688.ConfigUI\Object1688.ConfigUI.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Object1688.Logging\Object1688.Logging.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Object1688.Overlay\Object1688.Overlay.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Object1688.Monitor\Object1688.Monitor.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\config\config.default.json" Link="config\config.default.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- 托盘图标矩阵（4 状态 × 深浅色，F-70/AC-14/62/77/79）嵌入资源 -->
+  <ItemGroup>
+    <Resource Include="..\..\resources\icons\tray_normal_light.ico" Link="icons\tray_normal_light.ico" />
+    <Resource Include="..\..\resources\icons\tray_normal_dark.ico" Link="icons\tray_normal_dark.ico" />
+    <Resource Include="..\..\resources\icons\tray_paused_light.ico" Link="icons\tray_paused_light.ico" />
+    <Resource Include="..\..\resources\icons\tray_paused_dark.ico" Link="icons\tray_paused_dark.ico" />
+    <Resource Include="..\..\resources\icons\tray_dnd_light.ico" Link="icons\tray_dnd_light.ico" />
+    <Resource Include="..\..\resources\icons\tray_dnd_dark.ico" Link="icons\tray_dnd_dark.ico" />
+    <Resource Include="..\..\resources\icons\tray_error_light.ico" Link="icons\tray_error_light.ico" />
+    <Resource Include="..\..\resources\icons\tray_error_dark.ico" Link="icons\tray_error_dark.ico" />
+    <Resource Include="..\..\resources\icons\app.ico" Link="icons\app.ico" />
+  </ItemGroup>
+
+  <!-- 将子进程可执行产物复制到主进程输出目录（M1：Main 负责拉起） -->
+  <Target Name="CopyChildProcessOutputs" AfterTargets="Build">
+    <ItemGroup>
+      <_ChildOutput Include="..\Object1688.ConfigUI\bin\$(Configuration)\net8.0-windows\Object1688.ConfigUI.*" />
+      <_ChildOutput Include="..\Object1688.Logging\bin\$(Configuration)\net8.0-windows\Object1688.Logging.*" />
+      <_ChildOutput Include="..\Object1688.Overlay\bin\$(Configuration)\net8.0-windows\Object1688.Overlay.*" />
+      <_ChildOutput Include="..\Object1688.Monitor\bin\$(Configuration)\net8.0-windows\Object1688.Monitor.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_ChildOutput)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>

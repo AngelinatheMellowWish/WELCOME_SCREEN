@@ -1,0 +1,46 @@
+# THIRD_PARTY_NOTICES
+
+本文件登记 Object1688 分发物中包含/依赖的第三方组件及其许可（AC-33）。
+项目本体以 **GPL-3.0** 授权（见 `LICENSE`）。
+
+## 1. 第三方依赖总览
+
+| 组件 | 用途 | 许可 | 分发形态 |
+|------|------|------|----------|
+| .NET 8（Microsoft.NETCore.App / WindowsDesktop.App） | 运行时框架 | MIT（.NET Foundation） | 运行时依赖，不内嵌 |
+| Montserrat（嵌入字体） | 大字渲染西文字体 | SIL OFL 1.1 | 随程序分发（`fonts/`） |
+| xunit / xunit.runner.visualstudio | 单元测试框架 | Apache-2.0 | 仅测试期，不随发布分发 |
+| Microsoft.NET.Test.Sdk | 测试宿主 | MIT | 仅测试期，不随发布分发 |
+| coverlet.collector | 代码覆盖率收集 | MIT | 仅测试期，不随发布分发 |
+
+## 2. 说明
+
+- **运行期零第三方库**：产品代码仅依赖 .NET 8 基础类库与 Windows 桌面运行时
+  （WPF / Windows Forms / Win32 P/Invoke：DbgHelp MiniDump、user32 等系统 API），
+  不含需另行许可的第三方 NuGet 或二进制。
+- 字体许可全文见 `resources/fonts/OFL.txt`（随源分发）。单文件发布模式下字体作为
+  程序集嵌入资源分发，其 OFL 许可随本文件一并提供。
+
+## 3. 许可摘要
+
+### 3.1 SIL Open Font License 1.1（Montserrat）
+
+> 版权所有 Julieta Ulanovsky 及 Montserrat 项目贡献者。
+> 本字体依 SIL Open Font License 1.1 授权：可自由使用、修改与再分发；
+> 修改后须以同许可发布，不得单独出售字体文件。
+> 完整条款见 `resources/fonts/OFL.txt`。
+
+### 3.2 .NET（MIT）
+
+> .NET 及 .NET Framework 组件由 .NET Foundation 依 MIT 许可发布。
+> 详见 https://github.com/dotnet/runtime
+
+### 3.3 xUnit（Apache-2.0）
+
+> xUnit.net 依 Apache License 2.0 授权，仅用于测试期。
+> 详见 https://github.com/xunit/xunit
+
+---
+
+> 更新约定：新增任何第三方依赖（NuGet/字体/二进制）时须同步更新本表与开发规范
+> §7 目录结构中的对应登记；随发布包分发本文件。

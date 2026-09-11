@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Object1688</value>
+  </data>
+  <data name="TraySettings" xml:space="preserve">
+    <value>Settings…</value>
+  </data>
+  <data name="TrayExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="ErrorBalloonTitle" xml:space="preserve">
+    <value>Object1688 Error</value>
+  </data>
+  <data name="ErrorAggregatedBody" xml:space="preserve">
+    <value>Occurred {count} times. Click to view the log.</value>
+  </data>
+  <data name="ErrorOpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="FirstRunBalloon" xml:space="preserve">
+    <value>Object1688 is running in the background. Configure from the tray.</value>
+  </data>
+  <data name="TrayManual" xml:space="preserve">
+    <value>Manual title</value>
+  </data>
+  <data name="TrayPause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="TrayResume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="TrayPerf" xml:space="preserve">
+    <value>Performance window…</value>
+  </data>
+  <data name="TrayLanguage" xml:space="preserve">
+    <value>Switch language</value>
+  </data>
+  <data name="TrayAbout" xml:space="preserve">
+    <value>About…</value>
+  </data>
+  <data name="TrayDiagnostics" xml:space="preserve">
+    <value>Export diagnostics…</value>
+  </data>
+  <data name="TrayOpenLog" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="TrayCopyLastError" xml:space="preserve">
+    <value>Copy last error code</value>
+  </data>
+  <data name="StatusRunning" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="StatusPaused" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="StatusDnd" xml:space="preserve">
+    <value>Do not disturb</value>
+  </data>
+  <data name="StatusError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="TrayStatusFormat" xml:space="preserve">
+    <value>Object1688 — {status}</value>
+  </data>
+  <data name="ConfigWindowTitle" xml:space="preserve">
+    <value>Object1688 Configuration</value>
+  </data>
+  <data name="PerfWindowTitle" xml:space="preserve">
+    <value>Object1688 Performance</value>
+  </data>
+  <data name="AboutWindowTitle" xml:space="preserve">
+    <value>About Object1688</value>
+  </data>
+  <data name="LogFolderNotFound" xml:space="preserve">
+    <value>Log folder not found: {path}</value>
+  </data>
+  <data name="NoRecentError" xml:space="preserve">
+    <value>No recent error code</value>
+  </data>
+  <data name="LastErrorCopied" xml:space="preserve">
+    <value>Copied error code: {code}</value>
+  </data>
+  <data name="CfgNewRule" xml:space="preserve"><value>New rule</value></data>
+  <data name="CfgNewWizard" xml:space="preserve"><value>New-rule wizard…</value></data>
+  <data name="CfgDeleteRule" xml:space="preserve"><value>Delete rule</value></data>
+  <data name="CfgRestoreDefaults" xml:space="preserve"><value>Restore defaults</value></data>
+  <data name="CfgImport" xml:space="preserve"><value>Import…</value></data>
+  <data name="CfgExport" xml:space="preserve"><value>Export…</value></data>
+  <data name="CfgConflictCheck" xml:space="preserve"><value>Conflict check</value></data>
+  <data name="CfgTestPlay" xml:space="preserve"><value>Test display</value></data>
+  <data name="CfgSave" xml:space="preserve"><value>Save</value></data>
+  <data name="CfgRulesHeader" xml:space="preserve"><value>Trigger rules</value></data>
+  <data name="CfgSearchTip" xml:space="preserve"><value>Search rules (name / match value substring, F-27)</value></data>
+  <data name="CfgCopy" xml:space="preserve"><value>Copy</value></data>
+  <data name="CfgMoveUpTip" xml:space="preserve"><value>Move up (order = priority)</value></data>
+  <data name="CfgMoveDownTip" xml:space="preserve"><value>Move down</value></data>
+  <data name="CfgEnableAll" xml:space="preserve"><value>Enable all</value></data>
+  <data name="CfgDisableAll" xml:space="preserve"><value>Disable all</value></data>
+  <data name="CfgTabRules" xml:space="preserve"><value>Trigger rules</value></data>
+  <data name="CfgTabWelcome" xml:space="preserve"><value>Welcome title</value></data>
+  <data name="CfgTabManual" xml:space="preserve"><value>Manual title</value></data>
+  <data name="CfgTabDnd" xml:space="preserve"><value>DND / Sound / Auto-start</value></data>
+  <data name="CfgTabHelp" xml:space="preserve"><value>Help</value></data>
+  <data name="CfgMatchType" xml:space="preserve"><value>Match type</value></data>
+  <data name="CfgMatchMode" xml:space="preserve"><value>Match mode</value></data>
+  <data name="CfgMatchValue" xml:space="preserve"><value>Match value</value></data>
+  <data name="CfgMatchValueTip" xml:space="preserve"><value>Process name (e.g. chrome.exe) or window title / wildcard</value></data>
+  <data name="CfgEnable" xml:space="preserve"><value>Enabled</value></data>
+  <data name="CfgCaseSensitive" xml:space="preserve"><value>Case sensitive</value></data>
+  <data name="CfgFullscreen" xml:space="preserve"><value>Trigger in fullscreen</value></data>
+  <data name="CfgTargetScreen" xml:space="preserve"><value>Target screen</value></data>
+  <data name="CfgLinesHeader" xml:space="preserve"><value>Text lines (one per line; {appName}/{time} supported)</value></data>
+  <data name="CfgFontSize" xml:space="preserve"><value>Font size</value></data>
+  <data name="CfgDelay" xml:space="preserve"><value>Delay(s)</value></data>
+  <data name="CfgHold" xml:space="preserve"><value>Hold(s)</value></data>
+  <data name="CfgPosition" xml:space="preserve"><value>Position</value></data>
+  <data name="CfgOutlineColor" xml:space="preserve"><value>Outline color</value></data>
+  <data name="CfgOutlineWidth" xml:space="preserve"><value>Outline width</value></data>
+  <data name="CfgOutlineMode" xml:space="preserve"><value>Outline mode</value></data>
+  <data name="CfgPreset" xml:space="preserve"><value>Style preset</value></data>
+  <data name="CfgApply" xml:space="preserve"><value>Apply</value></data>
+  <data name="CfgPreviewHeader" xml:space="preserve"><value>Preview (drag the text to set a custom position, F-23/AC-66)</value></data>
+  <data name="CfgWelcomeEnabled" xml:space="preserve"><value>Show welcome title on every start</value></data>
+  <data name="CfgWelcomeLines" xml:space="preserve"><value>Welcome text lines (one per line; placeholders supported)</value></data>
+  <data name="CfgManualEnabled" xml:space="preserve"><value>Enable manual title (tray / hotkey)</value></data>
+  <data name="CfgManualLines" xml:space="preserve"><value>Manual title text lines (one per line)</value></data>
+  <data name="CfgShortcut" xml:space="preserve"><value>Shortcut</value></data>
+  <data name="CfgDndHeader" xml:space="preserve"><value>Do not disturb / scheduled silence</value></data>
+  <data name="CfgDndPaused" xml:space="preserve"><value>Globally pause titles (events still recorded)</value></data>
+  <data name="CfgDndSchedule" xml:space="preserve"><value>Enable scheduled quiet hours</value></data>
+  <data name="CfgDndPresentation" xml:space="preserve"><value>Auto-silence during presentation/mirroring (fullscreen detected)</value></data>
+  <data name="CfgSoundHeader" xml:space="preserve"><value>Title sound</value></data>
+  <data name="CfgSoundEnabled" xml:space="preserve"><value>Enable sound</value></data>
+  <data name="CfgSoundSource" xml:space="preserve"><value>Source</value></data>
+  <data name="CfgSoundVolume" xml:space="preserve"><value>Volume</value></data>
+  <data name="CfgAutostartHeader" xml:space="preserve"><value>Start with Windows</value></data>
+  <data name="CfgAutostart" xml:space="preserve"><value>Start with Windows (default on; writes HKCU Run)</value></data>
+  <data name="CfgReady" xml:space="preserve"><value>Ready</value></data>
+  <data name="PerfTimeWindow" xml:space="preserve"><value>Time window</value></data>
+  <data name="PerfExport" xml:space="preserve"><value>Export</value></data>
+  <data name="PerfClear" xml:space="preserve"><value>Clear history</value></data>
+  <data name="PerfCpuHeader" xml:space="preserve"><value>CPU % (per process)</value></data>
+  <data name="PerfMemHeader" xml:space="preserve"><value>Memory MB</value></data>
+  <data name="PerfFpsHeader" xml:space="preserve"><value>Frame rate fps (AC-68)</value></data>
+  <data name="PerfRankHeader" xml:space="preserve"><value>Top-5 rule trigger ranking</value></data>
+  <data name="PerfHourHeader" xml:space="preserve"><value>24h distribution</value></data>
+  <data name="PerfLastBannerHeader" xml:space="preserve"><value>Last title / render cost (AC-92/95)</value></data>
+  <data name="PerfProcessHeader" xml:space="preserve"><value>Process status</value></data>
+  <data name="PerfEventHeader" xml:space="preserve"><value>Event stream (ring 500)</value></data>
+  <data name="PerfColProcess" xml:space="preserve"><value>Process</value></data>
+  <data name="PerfColCpu" xml:space="preserve"><value>CPU %</value></data>
+  <data name="PerfColMem" xml:space="preserve"><value>Memory MB</value></data>
+  <data name="PerfReady" xml:space="preserve"><value>Refresh 1s · Ready</value></data>
+</root>

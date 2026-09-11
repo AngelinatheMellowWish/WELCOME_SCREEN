@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <RootNamespace>Object1688.Shared</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 强制将双语 resx 作为中性资源嵌入主程序集（置空 Culture 抑制卫星路由），供 LocalizedStrings 按 locale 直接解析 -->
+    <EmbeddedResource Update="Resources\Strings.zh-Hans.resx">
+      <LogicalName>Object1688.Shared.Resources.Strings.zh-Hans.resources</LogicalName>
+      <Culture></Culture>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Strings.en.resx">
+      <LogicalName>Object1688.Shared.Resources.Strings.en.resources</LogicalName>
+      <Culture></Culture>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

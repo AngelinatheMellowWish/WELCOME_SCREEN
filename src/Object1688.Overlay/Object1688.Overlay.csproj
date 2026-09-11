@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\..\resources\icons\app.ico</ApplicationIcon>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <RootNamespace>Object1688.Overlay</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Object1688.Shared\Object1688.Shared.csproj" />
+  </ItemGroup>
+
+  <!-- 嵌入 Montserrat（OFL）字体资源：pack://application:,,,/Object1688.Overlay;component/fonts/#Montserrat（架构 §3.4） -->
+  <ItemGroup>
+    <Resource Include="..\..\resources\fonts\Montserrat-Bold.ttf" Link="fonts\Montserrat-Bold.ttf" />
+    <Resource Include="..\..\resources\fonts\Montserrat-Regular.ttf" Link="fonts\Montserrat-Regular.ttf" />
+  </ItemGroup>
+
+</Project>

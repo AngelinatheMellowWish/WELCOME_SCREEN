@@ -1,0 +1,100 @@
+<Window x:Class="Object1688.Monitor.Perf.PerfWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{DynamicResource PerfWindowTitle}"
+        Width="1000" Height="720"
+        MinWidth="760" MinHeight="520"
+        WindowStartupLocation="CenterScreen"
+        Closing="OnWindowClosing">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 工具栏 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,6">
+            <TextBlock Text="{DynamicResource PerfTimeWindow}" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <ComboBox x:Name="TimeWindowCombo" Width="90" SelectionChanged="OnTimeWindowChanged"
+                      ToolTip="曲线时间窗：60s / 5min（AC-39）"/>
+            <Button x:Name="ExportButton" Content="{DynamicResource PerfExport}" Click="OnExportClicked" Margin="12,0,0,0"
+                    ToolTip="导出性能采样/事件/统计到 log/exports（CSV UTF-8 BOM / JSON / TXT，AC-91）"/>
+            <Button x:Name="ClearHistoryButton" Content="{DynamicResource PerfClear}" Click="OnClearHistoryClicked" Margin="6,0,0,0"
+                    ToolTip="清空事件流统计并重置持久化触发计数（确认后执行，NFR-04/AC-32）"/>
+            <TextBlock x:Name="StatusText" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="#666"/>
+        </StackPanel>
+
+        <!-- 上排：CPU 曲线 | 内存曲线 | 帧率曲线 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Header="{DynamicResource PerfCpuHeader}" Margin="0,0,4,4">
+                <Canvas x:Name="CpuCanvas" Background="#F5F5F5" ClipToBounds="True" AutomationProperties.Name="CPU 曲线"/>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Header="{DynamicResource PerfMemHeader}" Margin="4,0,4,4">
+                <Canvas x:Name="MemCanvas" Background="#F5F5F5" ClipToBounds="True" AutomationProperties.Name="内存曲线"/>
+            </GroupBox>
+            <GroupBox Grid.Column="2" Header="{DynamicResource PerfFpsHeader}" Margin="4,0,0,4">
+                <Canvas x:Name="FpsCanvas" Background="#F5F5F5" ClipToBounds="True" AutomationProperties.Name="帧率曲线"/>
+            </GroupBox>
+        </Grid>
+
+        <!-- 中排：排行 | 24h | 最近一次大字/渲染开销 -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Header="{DynamicResource PerfRankHeader}" Margin="0,0,4,4">
+                <Canvas x:Name="RankCanvas" Background="#F5F5F5" ClipToBounds="True" AutomationProperties.Name="规则触发排行图"/>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Header="{DynamicResource PerfHourHeader}" Margin="4,0,4,4">
+                <Canvas x:Name="HourCanvas" Background="#F5F5F5" ClipToBounds="True" AutomationProperties.Name="24 小时分布图"/>
+            </GroupBox>
+            <GroupBox Grid.Column="2" Header="{DynamicResource PerfLastBannerHeader}" Margin="4,0,0,4">
+                <DockPanel>
+                    <TextBlock x:Name="RenderCostText" DockPanel.Dock="Bottom" FontSize="11" Foreground="#666" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="LastBannerText" TextWrapping="Wrap" FontSize="13"/>
+                    </ScrollViewer>
+                </DockPanel>
+            </GroupBox>
+        </Grid>
+
+        <!-- 下排：进程状态表 | 事件流 -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Header="{DynamicResource PerfProcessHeader}" Margin="0,0,4,0">
+                <ListView x:Name="ProcessList" AutomationProperties.Name="进程状态表">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="{DynamicResource PerfColProcess}" Width="90" DisplayMemberBinding="{Binding Tag}"/>
+                            <GridViewColumn Header="{DynamicResource PerfColCpu}" Width="70" DisplayMemberBinding="{Binding CpuText}"/>
+                            <GridViewColumn Header="{DynamicResource PerfColMem}" Width="80" DisplayMemberBinding="{Binding MemText}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Header="{DynamicResource PerfEventHeader}" Margin="4,0,0,0">
+                <ListBox x:Name="EventList" FontFamily="Consolas" FontSize="12" AutomationProperties.Name="检测事件流"/>
+            </GroupBox>
+        </Grid>
+
+        <!-- 状态栏 -->
+        <StatusBar Grid.Row="4" Margin="0,6,0,0">
+            <StatusBarItem>
+                <TextBlock x:Name="SummaryText" Text="{DynamicResource PerfReady}"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

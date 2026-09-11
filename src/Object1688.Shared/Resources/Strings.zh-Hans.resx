@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Object1688 大字提示</value>
+  </data>
+  <data name="TraySettings" xml:space="preserve">
+    <value>设置…</value>
+  </data>
+  <data name="TrayExit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="ErrorBalloonTitle" xml:space="preserve">
+    <value>Object1688 错误</value>
+  </data>
+  <data name="ErrorAggregatedBody" xml:space="preserve">
+    <value>已发生 {count} 次，点击查看日志。</value>
+  </data>
+  <data name="ErrorOpenLogFolder" xml:space="preserve">
+    <value>打开日志所在文件夹</value>
+  </data>
+  <data name="FirstRunBalloon" xml:space="preserve">
+    <value>Object1688 已在后台运行，可从托盘配置。</value>
+  </data>
+  <data name="TrayManual" xml:space="preserve">
+    <value>手动大字</value>
+  </data>
+  <data name="TrayPause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="TrayResume" xml:space="preserve">
+    <value>恢复</value>
+  </data>
+  <data name="TrayPerf" xml:space="preserve">
+    <value>性能窗口…</value>
+  </data>
+  <data name="TrayLanguage" xml:space="preserve">
+    <value>切换语言</value>
+  </data>
+  <data name="TrayAbout" xml:space="preserve">
+    <value>关于…</value>
+  </data>
+  <data name="TrayDiagnostics" xml:space="preserve">
+    <value>导出诊断包…</value>
+  </data>
+  <data name="TrayOpenLog" xml:space="preserve">
+    <value>打开日志文件夹</value>
+  </data>
+  <data name="TrayCopyLastError" xml:space="preserve">
+    <value>复制最近错误码</value>
+  </data>
+  <data name="StatusRunning" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="StatusPaused" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="StatusDnd" xml:space="preserve">
+    <value>勿扰中</value>
+  </data>
+  <data name="StatusError" xml:space="preserve">
+    <value>有错误</value>
+  </data>
+  <data name="TrayStatusFormat" xml:space="preserve">
+    <value>Object1688 大字提示 — {status}</value>
+  </data>
+  <data name="ConfigWindowTitle" xml:space="preserve">
+    <value>Object1688 配置</value>
+  </data>
+  <data name="PerfWindowTitle" xml:space="preserve">
+    <value>Object1688 性能窗口</value>
+  </data>
+  <data name="AboutWindowTitle" xml:space="preserve">
+    <value>关于 Object1688</value>
+  </data>
+  <data name="LogFolderNotFound" xml:space="preserve">
+    <value>日志文件夹不存在：{path}</value>
+  </data>
+  <data name="NoRecentError" xml:space="preserve">
+    <value>暂无最近错误码</value>
+  </data>
+  <data name="LastErrorCopied" xml:space="preserve">
+    <value>已复制错误码：{code}</value>
+  </data>
+  <data name="CfgNewRule" xml:space="preserve"><value>新建规则</value></data>
+  <data name="CfgNewWizard" xml:space="preserve"><value>新建向导…</value></data>
+  <data name="CfgDeleteRule" xml:space="preserve"><value>删除规则</value></data>
+  <data name="CfgRestoreDefaults" xml:space="preserve"><value>恢复默认</value></data>
+  <data name="CfgImport" xml:space="preserve"><value>导入…</value></data>
+  <data name="CfgExport" xml:space="preserve"><value>导出…</value></data>
+  <data name="CfgConflictCheck" xml:space="preserve"><value>冲突检测</value></data>
+  <data name="CfgTestPlay" xml:space="preserve"><value>测试显示</value></data>
+  <data name="CfgSave" xml:space="preserve"><value>保存</value></data>
+  <data name="CfgRulesHeader" xml:space="preserve"><value>触发规则</value></data>
+  <data name="CfgSearchTip" xml:space="preserve"><value>搜索规则（名称/匹配值子串，F-27）</value></data>
+  <data name="CfgCopy" xml:space="preserve"><value>复制</value></data>
+  <data name="CfgMoveUpTip" xml:space="preserve"><value>上移（同命中优先按序）</value></data>
+  <data name="CfgMoveDownTip" xml:space="preserve"><value>下移</value></data>
+  <data name="CfgEnableAll" xml:space="preserve"><value>全部启用</value></data>
+  <data name="CfgDisableAll" xml:space="preserve"><value>全部停用</value></data>
+  <data name="CfgTabRules" xml:space="preserve"><value>触发规则</value></data>
+  <data name="CfgTabWelcome" xml:space="preserve"><value>欢迎大字</value></data>
+  <data name="CfgTabManual" xml:space="preserve"><value>手动大字</value></data>
+  <data name="CfgTabDnd" xml:space="preserve"><value>勿扰/提示音/自启</value></data>
+  <data name="CfgTabHelp" xml:space="preserve"><value>使用说明</value></data>
+  <data name="CfgMatchType" xml:space="preserve"><value>匹配类型</value></data>
+  <data name="CfgMatchMode" xml:space="preserve"><value>匹配模式</value></data>
+  <data name="CfgMatchValue" xml:space="preserve"><value>匹配值</value></data>
+  <data name="CfgMatchValueTip" xml:space="preserve"><value>进程名（如 chrome.exe）或窗口标题文本/通配模式</value></data>
+  <data name="CfgEnable" xml:space="preserve"><value>启用</value></data>
+  <data name="CfgCaseSensitive" xml:space="preserve"><value>区分大小写</value></data>
+  <data name="CfgFullscreen" xml:space="preserve"><value>全屏也触发</value></data>
+  <data name="CfgTargetScreen" xml:space="preserve"><value>目标屏</value></data>
+  <data name="CfgLinesHeader" xml:space="preserve"><value>文字行（每行一条，支持 {appName}/{time} 占位符）</value></data>
+  <data name="CfgFontSize" xml:space="preserve"><value>字号</value></data>
+  <data name="CfgDelay" xml:space="preserve"><value>延时(s)</value></data>
+  <data name="CfgHold" xml:space="preserve"><value>保持(s)</value></data>
+  <data name="CfgPosition" xml:space="preserve"><value>位置</value></data>
+  <data name="CfgOutlineColor" xml:space="preserve"><value>描边色</value></data>
+  <data name="CfgOutlineWidth" xml:space="preserve"><value>描边宽</value></data>
+  <data name="CfgOutlineMode" xml:space="preserve"><value>描边方式</value></data>
+  <data name="CfgPreset" xml:space="preserve"><value>样式预设</value></data>
+  <data name="CfgApply" xml:space="preserve"><value>套用</value></data>
+  <data name="CfgPreviewHeader" xml:space="preserve"><value>预览（可拖拽文字设置自定义位置，F-23/AC-66）</value></data>
+  <data name="CfgWelcomeEnabled" xml:space="preserve"><value>每次启动显示欢迎大字</value></data>
+  <data name="CfgWelcomeLines" xml:space="preserve"><value>欢迎文字行（每行一条，支持占位符）</value></data>
+  <data name="CfgManualEnabled" xml:space="preserve"><value>启用手动大字（托盘/快捷键触发）</value></data>
+  <data name="CfgManualLines" xml:space="preserve"><value>手动大字文字行（每行一条）</value></data>
+  <data name="CfgShortcut" xml:space="preserve"><value>快捷键</value></data>
+  <data name="CfgDndHeader" xml:space="preserve"><value>勿扰 / 定时静默</value></data>
+  <data name="CfgDndPaused" xml:space="preserve"><value>全局暂停大字（暂停期间触发不弹，事件照常记录）</value></data>
+  <data name="CfgDndSchedule" xml:space="preserve"><value>启用定时勿扰</value></data>
+  <data name="CfgDndPresentation" xml:space="preserve"><value>投屏/演示时自动静默（检测到全屏演示/投屏自动不弹）</value></data>
+  <data name="CfgSoundHeader" xml:space="preserve"><value>大字提示音</value></data>
+  <data name="CfgSoundEnabled" xml:space="preserve"><value>启用提示音</value></data>
+  <data name="CfgSoundSource" xml:space="preserve"><value>音源</value></data>
+  <data name="CfgSoundVolume" xml:space="preserve"><value>音量</value></data>
+  <data name="CfgAutostartHeader" xml:space="preserve"><value>开机自启</value></data>
+  <data name="CfgAutostart" xml:space="preserve"><value>开机自启动（默认开启；写入 HKCU Run 项）</value></data>
+  <data name="CfgReady" xml:space="preserve"><value>就绪</value></data>
+  <data name="PerfTimeWindow" xml:space="preserve"><value>时间窗</value></data>
+  <data name="PerfExport" xml:space="preserve"><value>导出</value></data>
+  <data name="PerfClear" xml:space="preserve"><value>清除历史</value></data>
+  <data name="PerfCpuHeader" xml:space="preserve"><value>CPU %（各进程）</value></data>
+  <data name="PerfMemHeader" xml:space="preserve"><value>内存 MB</value></data>
+  <data name="PerfFpsHeader" xml:space="preserve"><value>动画帧率 fps（AC-68）</value></data>
+  <data name="PerfRankHeader" xml:space="preserve"><value>规则触发排行（Top 5）</value></data>
+  <data name="PerfHourHeader" xml:space="preserve"><value>24h 时段分布</value></data>
+  <data name="PerfLastBannerHeader" xml:space="preserve"><value>最近一次大字 / 渲染开销（AC-92/95）</value></data>
+  <data name="PerfProcessHeader" xml:space="preserve"><value>进程状态</value></data>
+  <data name="PerfEventHeader" xml:space="preserve"><value>事件流（环形 500）</value></data>
+  <data name="PerfColProcess" xml:space="preserve"><value>进程</value></data>
+  <data name="PerfColCpu" xml:space="preserve"><value>CPU %</value></data>
+  <data name="PerfColMem" xml:space="preserve"><value>内存 MB</value></data>
+  <data name="PerfReady" xml:space="preserve"><value>刷新 1s · 就绪</value></data>
+</root>
