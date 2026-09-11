@@ -1,7 +1,7 @@
 namespace Object1688.Shared;
 
 /// <summary>
-/// 错误码常量集（与 docs/error_codes[v1.0.0].md 表逐条一致，共 49 条）。
+/// 错误码常量集（与 docs/error_codes[v1.1.0].md 表逐条一致，共 49 条）。
 /// 硬性规则：一经定义不删除（可标记 [废弃]）；代码中字符串必须与本表完全一致；新增必须先登记文档。
 /// </summary>
 public static class ErrorCodes

@@ -841,7 +841,7 @@ internal sealed class MainCoordinator
             var logDir = Path.Combine(AppContext.BaseDirectory, "log");
             var statsPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Object1688", "stats.json");
-            var version = typeof(MainCoordinator).Assembly.GetName().Version?.ToString(3) ?? "0.2.0";
+            var version = typeof(MainCoordinator).Assembly.GetName().Version?.ToString(3) ?? "0.2.1";
             var result = DiagnosticPackager.Create(
                 DiagnosticPackager.DefaultOutputDirectory, logDir, _configPath ?? string.Empty, statsPath, version);
 
@@ -939,7 +939,7 @@ internal sealed class MainCoordinator
         return JsonSerializer.SerializeToElement(new
         {
             running = true,
-            version = typeof(MainCoordinator).Assembly.GetName().Version?.ToString(3) ?? "0.2.0",
+            version = typeof(MainCoordinator).Assembly.GetName().Version?.ToString(3) ?? "0.2.1",
             paused = _config.Dnd.Paused,
             language = _config.Language,
             configPath = _configPath,

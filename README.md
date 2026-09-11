@@ -20,9 +20,9 @@
 ## 文档
 - 快速开始（零基础）：[`快速开始.md`](快速开始.md)
 - 脚本 / API 调用：[`API调用说明.md`](API调用说明.md)
-- 用户手册（中文）：[`docs/MANUAL[v1.0.0].md`](docs/MANUAL[v1.0.0].md)
-- User Manual (English): [`docs/MANUAL.en[v1.0.0].md`](docs/MANUAL.en[v1.0.0].md)
-- 变更日志：[`docs/CHANGELOG[v1.0.0].md`](docs/CHANGELOG[v1.0.0].md)
+- 用户手册（中文）：[`docs/MANUAL[v1.1.0].md`](docs/MANUAL[v1.1.0].md)
+- User Manual (English): [`docs/MANUAL.en[v1.1.0].md`](docs/MANUAL.en[v1.1.0].md)
+- 变更日志：[`docs/CHANGELOG[v1.1.0].md`](docs/CHANGELOG[v1.1.0].md)
 
 ## 从源码构建
 - 需要 .NET 8 SDK（Windows）。

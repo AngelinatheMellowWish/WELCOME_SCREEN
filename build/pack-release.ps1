@@ -10,7 +10,8 @@
     The zip root contains Object1688.Main.exe + the 4 child exes + config\ + build\ +
     LICENSE + THIRD_PARTY_NOTICES, so users just extract and double-click Main.exe.
 .PARAMETER Version
-    Version string used in the zip file name (default 0.1.0).
+    Version string used in the zip file name. If omitted, derived from the built
+    Object1688.Main.exe FileVersion (e.g. 0.2.1.0 -> 0.2.1).
 .PARAMETER Runtime
     Target RID matching the publish output (default win-x64).
 .EXAMPLE
@@ -18,18 +19,28 @@
 #>
 [CmdletBinding()]
 param(
-    [string]$Version = '0.1.0',
+    [string]$Version,
     [string]$Runtime = 'win-x64'
 )
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $src = Join-Path $root "dist\publish-$Runtime\Main"
-$out = Join-Path $root "dist\Object1688-v$Version-$Runtime.zip"
 
 if (-not (Test-Path -LiteralPath $src)) {
     throw "Publish output not found: $src (run build\publish-release.ps1 first)"
 }
+
+if (-not $Version) {
+    $mainExe = Join-Path $src 'Object1688.Main.exe'
+    if (Test-Path -LiteralPath $mainExe) {
+        $fv = (Get-Item -LiteralPath $mainExe).VersionInfo.FileVersion
+        if ($fv) { $Version = ($fv -split '\.')[0..2] -join '.' }
+    }
+    if (-not $Version) { $Version = '0.0.0' }
+}
+
+$out = Join-Path $root "dist\Object1688-v$Version-$Runtime.zip"
 
 if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
 

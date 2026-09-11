@@ -5,7 +5,7 @@ using Object1688.Shared;
 namespace Object1688.Tests;
 
 /// <summary>
-/// ErrorCodes 常量集一致性测试（docs/error_codes[v1.0.0].md 表 49 条）。
+/// ErrorCodes 常量集一致性测试（docs/error_codes[v1.1.0].md 表 49 条）。
 /// 硬性规则：不删除、字符串与文档一致、新增必须先登记文档。
 /// </summary>
 public class ErrorCodesTests

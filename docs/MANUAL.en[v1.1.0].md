@@ -2,8 +2,8 @@
 
 > User guide for the Control-style Desktop Title Overlay program
 > Document version: v1.0.0 (final)
-> Version history: registered in CHANGELOG[v1.0.0].md
-> English edition of `MANUAL[v1.0.0].md` (bilingual delivery, maintained in sync)
+> Version history: registered in CHANGELOG[v1.1.0].md
+> English edition of `MANUAL[v1.1.0].md` (bilingual delivery, maintained in sync)
 
 ---
 
@@ -69,7 +69,7 @@ The config window (tray "Settings…") uses a **tabbed** layout; the top toolbar
 | DND / Sound / Auto-start | Global pause, scheduled quiet-hours toggle, **presentation/mirroring auto-silence toggle**; sound (system/custom source + volume + custom wav/mp3 path); start-with-Windows toggle |
 | Help | Built-in usage guide (operations + privacy) |
 
-> Save runs validation → atomic disk write → main process hot-reload broadcast; "Restore defaults" first confirms unsaved changes (AC-38).
+> Save runs validation → atomic disk write → main process hot-reload broadcast; **closing the window / switching rules** with unsaved changes prompts Save / Discard / Cancel, and "Restore defaults" first confirms unsaved changes (AC-38).
 
 ### How to fill in outline color / outline width
 - **Outline color** (draws a ring around the white title so it stays legible on light backgrounds): click a **Quick colors** swatch for one-tap selection, or click **Pick color…** to use the Windows system color picker; you can also type `#RRGGBB` (`#000000` black / `#FFFFFF` white / `#FF0000` red…); **leave empty = follow the global default** (click **Follow global** to clear).
@@ -102,7 +102,7 @@ The config window (tray "Settings…") uses a **tabbed** layout; the top toolbar
 | No title over elevated windows | The app runs as the current user and cannot cover elevated (admin) windows; on match it logs OVL-W-3008 and shows a one-time tray notice (AC-94) |
 | "Capability unavailable" at startup | Start-up self-check failed and the app is running in degraded mode: follow the on-screen hint (restore default config / reinstall font) then restart |
 | Chinese shows as boxes | CJK falls back to the system font by design; if still broken, please report (embedded font covers Latin only) |
-| Program crash | Dump file in `log/crash/` (keeps last 10 or ≤200MB); logs in `log/`; report with [error codes](error_codes[v1.0.0].md) |
+| Program crash | Dump file in `log/crash/` (keeps last 10 or ≤200MB); logs in `log/`; report with [error codes](error_codes[v1.1.0].md) |
 | Want to submit full context | Tray "Export diagnostics…" or script `--control diagnostics`: creates `log/exports/diagnostics-*.zip` (logs + config + stats + environment, AC-83) |
 | Restore defaults | Use "Restore defaults" in the config window toolbar (unsaved changes are confirmed first), or delete `%APPDATA%\Object1688\config.json` and restart |
 | Clear records | The performance window "Clear history" wipes the event stream and persisted trigger statistics; log files can be deleted manually under `log/*.log` (or run `build/uninstall.ps1 -AlsoCleanLogs`) |

@@ -50,6 +50,9 @@ public partial class MainWindow : Window
     /// <summary>是否有未保存修改（AC-38：关闭/切换时提示依据）。</summary>
     private bool _dirty;
 
+    /// <summary>最近一次保存的重叠冲突提示（保存成功后在状态栏展示）。</summary>
+    private string _lastOverlapWarn = string.Empty;
+
     /// <summary>预览拖拽状态（AC-66：拖拽文字设置自定义位置）。</summary>
     private bool _previewDragging;
     private Point _previewDragOffset;
@@ -197,11 +200,20 @@ public partial class MainWindow : Window
         AutostartCheck.IsChecked = _autostartValue;
     }
 
-    /// <summary>规则列表选中变化 → 刷新编辑区 + 预览。</summary>
+    /// <summary>规则列表选中变化 → 刷新编辑区 + 预览；有未保存修改时先确认（AC-38）。</summary>
     private void OnRuleSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_loadGuard)
         {
+            return;
+        }
+
+        if (_dirty && !ConfirmUnsavedChanges())
+        {
+            // 取消切换：回退到原选中项（守卫避免递归触发）
+            _loadGuard = true;
+            RulesListBox.SelectedItem = _editing;
+            _loadGuard = false;
             return;
         }
 
@@ -775,31 +787,10 @@ public partial class MainWindow : Window
     /// </summary>
     private async void OnSaveClicked(object sender, RoutedEventArgs e)
     {
-        CommitEditingRule();
-        SyncTabsFromControls();
-        var config = BuildConfig();
+        var config = SaveToDisk();
         if (config is null)
         {
-            return; // 校验失败信息已写入状态栏
-        }
-
-        // 冲突/重复检测（F-29）：完全重复 = error 拦截；重叠 = warning 提示不阻断
-        var conflicts = ConfigValidator.CheckConflicts(config.Rules);
-        var blocking = conflicts.Where(c => c.Message.Contains("完全重复")).ToList();
-        if (blocking.Count > 0)
-        {
-            StatusText.Text = $"保存被拦截：{blocking[0].Message}";
-            return;
-        }
-
-        try
-        {
-            ConfigSaver.Save(_configPath, config);
-        }
-        catch (IOException ex)
-        {
-            StatusText.Text = ex.Message;
-            return;
+            return; // 校验/冲突/写盘失败信息已写入状态栏
         }
 
         // 热生效：ConfigChanged 上报 Main（Main 更新内存并广播 Overlay）
@@ -817,9 +808,92 @@ public partial class MainWindow : Window
         }
 
         _dirty = false;
-        var overlapWarn = string.Join("；", conflicts.Where(c => !c.Message.Contains("完全重复")).Select(c => c.Message));
         StatusText.Text = $"已保存并生效（{ErrorCodes.ConfigSaved}）{(_rules.Count == 0 ? "（无规则）" : string.Empty)}"
-            + (string.IsNullOrEmpty(overlapWarn) ? string.Empty : $"；提示：{overlapWarn}");
+            + (string.IsNullOrEmpty(_lastOverlapWarn) ? string.Empty : $"；提示：{_lastOverlapWarn}");
+    }
+
+    /// <summary>
+    /// 同步保存到磁盘：编辑回写 → 重建 AppConfig → 校验/冲突 → ConfigSaver 原子写。
+    /// 成功返回配置（供广播热生效）；失败返回 null（状态栏已提示），旧文件保留。
+    /// </summary>
+    private AppConfig? SaveToDisk()
+    {
+        CommitEditingRule();
+        SyncTabsFromControls();
+        var config = BuildConfig();
+        if (config is null)
+        {
+            return null; // 校验失败信息已写入状态栏
+        }
+
+        // 冲突/重复检测（F-29）：完全重复 = error 拦截；重叠 = warning 提示不阻断
+        var conflicts = ConfigValidator.CheckConflicts(config.Rules);
+        var blocking = conflicts.Where(c => c.Message.Contains("完全重复")).ToList();
+        if (blocking.Count > 0)
+        {
+            StatusText.Text = $"保存被拦截：{blocking[0].Message}";
+            return null;
+        }
+
+        try
+        {
+            ConfigSaver.Save(_configPath, config);
+        }
+        catch (IOException ex)
+        {
+            StatusText.Text = ex.Message;
+            return null;
+        }
+
+        _lastOverlapWarn = string.Join("；", conflicts.Where(c => !c.Message.Contains("完全重复")).Select(c => c.Message));
+        return config;
+    }
+
+    /// <summary>未保存修改确认（AC-38：关闭/切换 → 保存 / 放弃 / 取消）。</summary>
+    /// <returns>true = 可继续（已保存或已放弃）；false = 用户取消或保存失败（应中止关闭/切换）。</returns>
+    private bool ConfirmUnsavedChanges()
+    {
+        var choice = MessageBox.Show(
+            this,
+            "当前有未保存的修改。\n\n是（Y）= 保存后继续；否（N）= 放弃修改；取消 = 返回继续编辑。",
+            "未保存的修改",
+            MessageBoxButton.YesNoCancel,
+            MessageBoxImage.Warning);
+        switch (choice)
+        {
+            case MessageBoxResult.Yes:
+                var config = SaveToDisk();
+                if (config is null)
+                {
+                    return false; // 保存失败：不关闭/不切换（状态栏已提示）
+                }
+
+                BroadcastConfig(config);
+                _dirty = false;
+                return true;
+            case MessageBoxResult.No:
+                _dirty = false; // 先清除，避免 LoadConfig 内选中变化再次触发确认
+                LoadConfig();   // 重新从磁盘加载 = 真正放弃内存中的未保存修改
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /// <summary>热生效广播（ConfigChanged → Main）；失败仅提示不阻断关闭/切换。</summary>
+    private async void BroadcastConfig(AppConfig config)
+    {
+        try
+        {
+            if (App.Current is App app)
+            {
+                await app.SendToMainAsync(IpcMessageType.ConfigChanged, config, TimeSpan.FromSeconds(3));
+            }
+        }
+        catch (Exception ex) when (ex is OperationCanceledException or TimeoutException)
+        {
+            StatusText.Text = $"配置已写盘，但 ConfigChanged 广播超时：{ex.Message}";
+        }
     }
 
     /// <summary>保存前将各页签控件当前值显式同步回目标节（冗余防御，事件已实时同步）。</summary>
@@ -883,7 +957,7 @@ public partial class MainWindow : Window
         }
     }
 
-    /// <summary>窗口关闭 → 隐藏（可再次打开，架构 §2.4）。</summary>
+    /// <summary>窗口关闭 → 隐藏（可再次打开，架构 §2.4）；有未保存修改时先确认（AC-38）。</summary>
     protected override void OnClosing(CancelEventArgs e)
     {
         if (_lifetimeCancelled)
@@ -893,6 +967,11 @@ public partial class MainWindow : Window
         }
 
         e.Cancel = true;
+        if (_dirty && !ConfirmUnsavedChanges())
+        {
+            return; // 用户取消（或保存失败）：保持窗口
+        }
+
         Hide();
     }
 
