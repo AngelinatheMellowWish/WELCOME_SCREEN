@@ -71,6 +71,10 @@ The config window (tray "Settings…") uses a **tabbed** layout; the top toolbar
 
 > Save runs validation → atomic disk write → main process hot-reload broadcast; "Restore defaults" first confirms unsaved changes (AC-38).
 
+### How to fill in outline color / outline width
+- **Outline color** (draws a ring around the white title so it stays legible on light backgrounds): click a **Quick colors** swatch for one-tap selection, or click **Pick color…** to use the Windows system color picker; you can also type `#RRGGBB` (`#000000` black / `#FFFFFF` white / `#FF0000` red…); **leave empty = follow the global default** (click **Follow global** to clear).
+- **Outline width**: pixels, `0` = no outline (usually 2–6). **Outline mode**: Soft glow (mode A, low cost) / Precise (mode B, sharper).
+
 ---
 
 ## 4. Performance Monitor Window

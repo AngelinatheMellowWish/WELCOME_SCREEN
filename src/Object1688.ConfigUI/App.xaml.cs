@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
+using Application = System.Windows.Application;
 using Object1688.Shared.Config;
 using Object1688.Shared.Crash;
 using Object1688.Shared.I18n;

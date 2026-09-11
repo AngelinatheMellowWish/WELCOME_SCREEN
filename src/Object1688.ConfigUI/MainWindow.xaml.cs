@@ -14,6 +14,9 @@ using Object1688.Shared.Ipc;
 using Object1688.Shared.Text;
 using Object1688.Shared.Ui;
 using MatchType = Object1688.Shared.Config.MatchType;
+using Color = System.Windows.Media.Color;
+using Point = System.Windows.Point;
+using ComboBox = System.Windows.Controls.ComboBox;
 
 namespace Object1688.ConfigUI;
 
@@ -240,12 +243,96 @@ public partial class MainWindow : Window
         _editing.HoldSeconds = ParseDouble(HoldSecondsBox.Text) ?? 0;
         _editing.Position = ResolvePositionSelection(PositionCombo.SelectedItem as string, _editing.Position);
         _editing.OutlineColor = OutlineColorBox.Text;
+        UpdateOutlineColorSwatch();
         _editing.OutlineWidth = ParseDouble(OutlineWidthBox.Text) ?? -1;
         _editing.OutlineMode = OutlineModeTag(OutlineModeCombo);
         _editing.Touch(); // 触发 Summary 通知刷新列表
 
         MarkDirty();
         UpdatePreview();
+    }
+
+    /// <summary>常用色块点击（F-78/AC-100）：一键填入描边色。</summary>
+    private void OnOutlineSwatchClicked(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button { Tag: string hex })
+        {
+            OutlineColorBox.Text = hex;
+        }
+    }
+
+    /// <summary>系统取色器（F-78/AC-100）：ColorDialog 选色后填入 #RRGGBB（含 alpha 时用 #AARRGGBB）。</summary>
+    private void OnPickOutlineColorClicked(object sender, RoutedEventArgs e)
+    {
+        using var dialog = new System.Windows.Forms.ColorDialog
+        {
+            FullOpen = true,
+            AnyColor = true,
+        };
+        if (TryParseColor(OutlineColorBox.Text, out var current))
+        {
+            dialog.Color = System.Drawing.Color.FromArgb(current.A, current.R, current.G, current.B);
+        }
+
+        if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        {
+            var c = dialog.Color;
+            OutlineColorBox.Text = c.A < 255
+                ? $"#{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}"
+                : $"#{c.R:X2}{c.G:X2}{c.B:X2}";
+        }
+    }
+
+    /// <summary>「跟随全局 / 清除」（F-78/AC-100）：清空描边色 = 跟随全局默认。</summary>
+    private void OnClearOutlineColorClicked(object sender, RoutedEventArgs e)
+        => OutlineColorBox.Text = string.Empty;
+
+    /// <summary>更新描边色预览块（F-78/AC-100）：非法 / 空显示透明。</summary>
+    private void UpdateOutlineColorSwatch()
+    {
+        if (OutlineColorSwatch is null)
+        {
+            return;
+        }
+
+        OutlineColorSwatch.Background = TryParseColor(OutlineColorBox.Text, out var color)
+            ? new SolidColorBrush(color)
+            : Brushes.Transparent;
+    }
+
+    /// <summary>解析 #RRGGBB / #AARRGGBB（大小写不敏感，可省 #）；失败返回 false。</summary>
+    private static bool TryParseColor(string? text, out Color color)
+    {
+        color = Colors.Black;
+        var s = (text ?? string.Empty).Trim();
+        if (s.Length == 0)
+        {
+            return false;
+        }
+
+        if (!s.StartsWith('#'))
+        {
+            s = "#" + s;
+        }
+
+        try
+        {
+            if (ColorConverter.ConvertFromString(s) is Color parsed)
+            {
+                color = parsed;
+                return true;
+            }
+        }
+        catch (FormatException)
+        {
+            // 非法格式
+        }
+        catch (NotSupportedException)
+        {
+            // 无法转换
+        }
+
+        return false;
     }
 
     /// <summary>新建规则（F-28 引导入口）：追加一条默认规则并选中。</summary>

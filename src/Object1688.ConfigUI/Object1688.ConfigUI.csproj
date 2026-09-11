@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -18,6 +20,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Object1688.Shared\Object1688.Shared.csproj" />
+  </ItemGroup>
+
+  <!-- WinForms 仅用于系统取色器（ColorDialog）；移除隐式 using 以免与 WPF 类型冲突 -->
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
   </ItemGroup>
 
 </Project>

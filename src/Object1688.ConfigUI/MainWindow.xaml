@@ -142,6 +142,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <TextBox x:Name="LinesBox" Grid.Row="0" Height="72" AcceptsReturn="True"
                                          TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
@@ -159,8 +160,14 @@
                                     <TextBlock Text="{DynamicResource CfgPosition}" VerticalAlignment="Center" Margin="16,0,4,0"/>
                                     <ComboBox x:Name="PositionCombo" Width="110" SelectionChanged="OnRuleComboSelChanged"/>
                                     <TextBlock Text="{DynamicResource CfgOutlineColor}" VerticalAlignment="Center" Margin="16,0,4,0"/>
-                                    <TextBox x:Name="OutlineColorBox" Width="80"
-                                             TextChanged="OnRuleTextChanged" ToolTip="#RRGGBB，空 = 全局默认"/>
+                                    <Border x:Name="OutlineColorSwatch" Width="18" Height="18" BorderBrush="#888" BorderThickness="1"
+                                            Background="#000000" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                    <TextBox x:Name="OutlineColorBox" Width="76"
+                                             TextChanged="OnRuleTextChanged" ToolTip="{DynamicResource CfgOutlineColorTip}"/>
+                                    <Button x:Name="PickOutlineColorButton" Content="{DynamicResource CfgPickColor}" Padding="8,1" Margin="2,0"
+                                            Click="OnPickOutlineColorClicked" ToolTip="{DynamicResource CfgPickColorTip}"/>
+                                    <Button x:Name="ClearOutlineColorButton" Content="{DynamicResource CfgFollowGlobal}" Padding="8,1" Margin="2,0"
+                                            Click="OnClearOutlineColorClicked" ToolTip="{DynamicResource CfgFollowGlobalTip}"/>
                                     <TextBlock Text="{DynamicResource CfgOutlineWidth}" VerticalAlignment="Center" Margin="16,0,4,0"/>
                                     <TextBox x:Name="OutlineWidthBox" Width="52" TextAlignment="Right"
                                              TextChanged="OnRuleTextChanged" ToolTip="DIP，0 = 无描边"/>
@@ -179,6 +186,17 @@
                                     <Button x:Name="ApplyPresetButton" Content="{DynamicResource CfgApply}" Margin="6,0,0,0" Padding="10,2"
                                             Click="OnApplyPresetClicked"
                                             ToolTip="将预设参数（字号/描边/位置）套用到当前规则，套用后仍可微调（F-23/AC-60）"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,6,0,0">
+                                    <TextBlock Text="{DynamicResource CfgOutlineColorQuick}" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                    <Button x:Name="SwatchBlack" Click="OnOutlineSwatchClicked" Tag="#000000" Width="22" Height="22" Margin="2,0" Background="Black" BorderBrush="#888" ToolTip="黑 #000000"/>
+                                    <Button x:Name="SwatchWhite" Click="OnOutlineSwatchClicked" Tag="#FFFFFF" Width="22" Height="22" Margin="2,0" Background="White" BorderBrush="#888" ToolTip="白 #FFFFFF"/>
+                                    <Button x:Name="SwatchRed" Click="OnOutlineSwatchClicked" Tag="#FF0000" Width="22" Height="22" Margin="2,0" Background="Red" BorderBrush="#888" ToolTip="红 #FF0000"/>
+                                    <Button x:Name="SwatchBlue" Click="OnOutlineSwatchClicked" Tag="#0000FF" Width="22" Height="22" Margin="2,0" Background="Blue" BorderBrush="#888" ToolTip="蓝 #0000FF"/>
+                                    <Button x:Name="SwatchYellow" Click="OnOutlineSwatchClicked" Tag="#FFFF00" Width="22" Height="22" Margin="2,0" Background="Yellow" BorderBrush="#888" ToolTip="黄 #FFFF00"/>
+                                    <Button x:Name="SwatchGreen" Click="OnOutlineSwatchClicked" Tag="#008000" Width="22" Height="22" Margin="2,0" Background="Green" BorderBrush="#888" ToolTip="绿 #008000"/>
+                                    <Button x:Name="SwatchGray" Click="OnOutlineSwatchClicked" Tag="#333333" Width="22" Height="22" Margin="2,0" Background="#333333" BorderBrush="#888" ToolTip="深灰 #333333"/>
+                                    <TextBlock Text="{DynamicResource CfgOutlineColorHint}" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="#888"/>
                                 </StackPanel>
                             </Grid>
                         </GroupBox>

@@ -130,6 +130,13 @@
   <data name="CfgOutlineColor" xml:space="preserve"><value>描边色</value></data>
   <data name="CfgOutlineWidth" xml:space="preserve"><value>描边宽</value></data>
   <data name="CfgOutlineMode" xml:space="preserve"><value>描边方式</value></data>
+  <data name="CfgOutlineColorTip" xml:space="preserve"><value>#RRGGBB 或 #AARRGGBB；可点色块 / 用取色器，留空 = 跟随全局默认</value></data>
+  <data name="CfgPickColor" xml:space="preserve"><value>选择颜色…</value></data>
+  <data name="CfgPickColorTip" xml:space="preserve"><value>打开系统取色器选择描边颜色</value></data>
+  <data name="CfgFollowGlobal" xml:space="preserve"><value>跟随全局</value></data>
+  <data name="CfgFollowGlobalTip" xml:space="preserve"><value>清空描边色 = 跟随全局默认描边色</value></data>
+  <data name="CfgOutlineColorQuick" xml:space="preserve"><value>常用色</value></data>
+  <data name="CfgOutlineColorHint" xml:space="preserve"><value>点色块或用取色器；也可手填 #RRGGBB；留空 = 跟随全局</value></data>
   <data name="CfgPreset" xml:space="preserve"><value>样式预设</value></data>
   <data name="CfgApply" xml:space="preserve"><value>套用</value></data>
   <data name="CfgPreviewHeader" xml:space="preserve"><value>预览（可拖拽文字设置自定义位置，F-23/AC-66）</value></data>

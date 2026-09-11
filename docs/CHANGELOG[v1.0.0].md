@@ -332,6 +332,15 @@
 - 同步 VERSION_REGISTRY（§4 程序集 / §5 文档索引）+ AGENTS/docs AGENTS/README/architecture/TEST_REPORT 引用
 - **本次仅改文档 + 版本号**；ConfigUI 描边色色块/取色器/跟随全局/说明 + 快速开始·MANUAL 填写说明按 F-78/AC-100 **随后实施**
 
+#### Added（配置输入易用性实施 · F-78/AC-100，2026-09-11）
+- ConfigUI 描边色输入辅助（AC-100）：规则编辑「描边色」旁新增**色块实时预览** + 「**选择颜色…**」（`System.Windows.Forms.ColorDialog` 系统取色器）+ 「**跟随全局**」（清空 = 回退全局默认）；下方「**常用色**」色块行（黑/白/红/蓝/黄/绿/深灰）一键写入 + 内联说明
+- `MainWindow.xaml.cs`：`OnOutlineSwatchClicked`/`OnPickOutlineColorClicked`/`OnClearOutlineColorClicked`/`UpdateOutlineColorSwatch`/`TryParseColor`（解析 `#RRGGBB`/`#AARRGGBB` 供色块显示，非法/空回退）；`SyncEditingFromControls` 同步刷新色块；`App.xaml.cs` 增 `using Application = System.Windows.Application;`
+- csproj：启用 `UseWindowsForms=true`（仅供取色器）+ `ApplicationHighDpiMode=PerMonitorV2`（DPI 从 app.manifest 移出，规避 `WFAC010`）+ `<Using Remove="System.Windows.Forms"/System.Drawing/>`（防 WPF 类型歧义：Application/MessageBox/Button/Brushes/ColorConverter/ComboBox/Point/Color）
+- i18n：resx 中英各新增 **7 键**（CfgOutlineColorTip/CfgPickColor/CfgPickColorTip/CfgFollowGlobal/CfgFollowGlobalTip/CfgOutlineColorQuick/CfgOutlineColorHint），共 **105 键**（`check-resx-keys.ps1` PASS）
+- 文档：`快速开始.md` 与 `MANUAL` 中英新增「描边色 / 描边宽度怎么填」小节（色块/取色器/手填/留空跟随全局/宽度/描边方式）
+- 验证：build 0 警告 0 错误；全量 **396/396**；ConfigUI 启动无崩溃（「Object1688 设置」）
+- 程序集 **0.2.0**
+
 #### Changed（验收表 AC 逐项勾验，2026-09-10）
 - `TEST_REPORT` AC 表按实现/验收状态勾验：**93/99 ✅**；余 6 项（AC-24 多显示器 / AC-40 500 规则基准 / AC-42 高 DPI / AC-67 性能量化 / AC-74 旋转屏 / AC-82 启动自检完整项）标注需 M6 实机验证
 - 无代码变更、无错误码变更、无单测变更

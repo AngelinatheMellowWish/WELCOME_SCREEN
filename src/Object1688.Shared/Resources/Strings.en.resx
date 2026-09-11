@@ -130,6 +130,13 @@
   <data name="CfgOutlineColor" xml:space="preserve"><value>Outline color</value></data>
   <data name="CfgOutlineWidth" xml:space="preserve"><value>Outline width</value></data>
   <data name="CfgOutlineMode" xml:space="preserve"><value>Outline mode</value></data>
+  <data name="CfgOutlineColorTip" xml:space="preserve"><value>#RRGGBB or #AARRGGBB; click a swatch or use the picker; empty = follow global default</value></data>
+  <data name="CfgPickColor" xml:space="preserve"><value>Pick color…</value></data>
+  <data name="CfgPickColorTip" xml:space="preserve"><value>Open the system color picker</value></data>
+  <data name="CfgFollowGlobal" xml:space="preserve"><value>Follow global</value></data>
+  <data name="CfgFollowGlobalTip" xml:space="preserve"><value>Clear the outline color = follow the global default</value></data>
+  <data name="CfgOutlineColorQuick" xml:space="preserve"><value>Quick colors</value></data>
+  <data name="CfgOutlineColorHint" xml:space="preserve"><value>Click a swatch or use the picker; or type #RRGGBB; empty = follow global</value></data>
   <data name="CfgPreset" xml:space="preserve"><value>Style preset</value></data>
   <data name="CfgApply" xml:space="preserve"><value>Apply</value></data>
   <data name="CfgPreviewHeader" xml:space="preserve"><value>Preview (drag the text to set a custom position, F-23/AC-66)</value></data>
