@@ -49,6 +49,6 @@ public partial class AboutWindow : Window
     private static string GetVersion()
     {
         var version = Assembly.GetExecutingAssembly().GetName().Version;
-        return version?.ToString(3) ?? "0.1.0";
+        return version?.ToString(3) ?? "0.2.0";
     }
 }

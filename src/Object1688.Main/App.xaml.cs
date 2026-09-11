@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Reflection;
 using System.Windows;
 using Microsoft.Win32;
@@ -691,6 +691,6 @@ public partial class App : System.Windows.Application
     private static string GetVersion()
     {
         var version = typeof(App).Assembly.GetName().Version;
-        return version?.ToString(3) ?? "0.1.0";
+        return version?.ToString(3) ?? "0.2.0";
     }
 }
