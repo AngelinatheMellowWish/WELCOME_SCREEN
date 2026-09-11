@@ -200,20 +200,11 @@ public partial class MainWindow : Window
         AutostartCheck.IsChecked = _autostartValue;
     }
 
-    /// <summary>规则列表选中变化 → 刷新编辑区 + 预览；有未保存修改时先确认（AC-38）。</summary>
+    /// <summary>规则列表选中变化 → 刷新编辑区 + 预览。切换规则不弹确认：编辑保存在各规则模型，点保存才落盘，切换不丢数据（AC-38 仅在关闭窗口时确认）。</summary>
     private void OnRuleSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_loadGuard)
         {
-            return;
-        }
-
-        if (_dirty && !ConfirmUnsavedChanges())
-        {
-            // 取消切换：回退到原选中项（守卫避免递归触发）
-            _loadGuard = true;
-            RulesListBox.SelectedItem = _editing;
-            _loadGuard = false;
             return;
         }
 
@@ -1068,8 +1059,12 @@ public partial class MainWindow : Window
                 .ToList();
             PreviewTextBlock.Text = lines.Count > 0 ? string.Join(Environment.NewLine, lines) : "（文字行为空）";
             var fontSize = model.FontSize > 0 ? model.FontSize : 96;
-            // 预览区缩放：预览区最高约 56 DIP；行数多时等比下调避免超高
-            PreviewTextBlock.FontSize = Math.Clamp(fontSize * (lines.Count > 0 ? 0.6 : 1.0), 12, 56);
+            // 预览区按比例缩放（真实渲染无上限）：0.5 系数映射 + 按预览区高度/行数自适应，最大 200 DIP，使大字号可见增大
+            var scale = lines.Count > 0 ? 0.5 : 1.0;
+            var maxByHeight = PreviewCanvas.ActualHeight > 0
+                ? Math.Max(24, (PreviewCanvas.ActualHeight - 8) / Math.Max(1, lines.Count))
+                : 200;
+            PreviewTextBlock.FontSize = Math.Clamp(Math.Min(fontSize * scale, maxByHeight), 10, 200);
 
             // 文字色恒白（BannerAssembler 定稿），描边色仅作提示（真实描边由 Overlay 渲染）
             PreviewTextBlock.Foreground = Brushes.White;

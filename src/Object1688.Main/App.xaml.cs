@@ -691,6 +691,6 @@ public partial class App : System.Windows.Application
     private static string GetVersion()
     {
         var version = typeof(App).Assembly.GetName().Version;
-        return version?.ToString(3) ?? "0.2.1";
+        return version?.ToString(3) ?? "0.2.2";
     }
 }

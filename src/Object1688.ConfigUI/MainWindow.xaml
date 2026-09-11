@@ -95,6 +95,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <!-- 匹配配置 -->
@@ -219,6 +220,15 @@
                                 </Canvas>
                             </Border>
                         </GroupBox>
+
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                            <Button x:Name="EditorSaveButton" Content="{DynamicResource CfgSave}" Padding="16,4" MinWidth="80"
+                                    Click="OnSaveClicked" ToolTip="校验 → 原子写盘 → 广播 ConfigChanged 热生效（CFG-I-1004）"
+                                    AutomationProperties.Name="保存配置"/>
+                            <Button x:Name="EditorApplyButton" Content="{DynamicResource CfgApplyChanges}" Padding="16,4" MinWidth="80" Margin="8,0,0,0"
+                                    Click="OnSaveClicked" ToolTip="应用当前修改并热生效（等同保存）"
+                                    AutomationProperties.Name="应用配置"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem>
 

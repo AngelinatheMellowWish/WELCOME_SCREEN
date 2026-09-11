@@ -102,6 +102,7 @@
   <data name="CfgConflictCheck" xml:space="preserve"><value>冲突检测</value></data>
   <data name="CfgTestPlay" xml:space="preserve"><value>测试显示</value></data>
   <data name="CfgSave" xml:space="preserve"><value>保存</value></data>
+  <data name="CfgApplyChanges" xml:space="preserve"><value>应用</value></data>
   <data name="CfgRulesHeader" xml:space="preserve"><value>触发规则</value></data>
   <data name="CfgSearchTip" xml:space="preserve"><value>搜索规则（名称/匹配值子串，F-27）</value></data>
   <data name="CfgCopy" xml:space="preserve"><value>复制</value></data>
